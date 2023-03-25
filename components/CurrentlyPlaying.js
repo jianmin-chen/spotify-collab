@@ -17,6 +17,7 @@ export default function CurrentlyPlaying() {
                     variant: "destructive",
                     description: `Error getting current song: ${err.message}`
                 });
+                setSong(null);
             });
     };
 

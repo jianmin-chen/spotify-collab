@@ -1,8 +1,8 @@
 import { getAccessToken } from "@/lib/spotify";
 
 export default async function handler(req, res) {
-    const { access_token: accessToken } = await getAccessToken();
     try {
+        const { access_token: accessToken } = await getAccessToken();
         const json = await fetch(
             "https://api.spotify.com/v1/me/player/currently-playing",
             {
@@ -24,7 +24,6 @@ export default async function handler(req, res) {
             }
         });
     } catch (err) {
-        console.log(err);
         return res.status(200).json({ current: "N/A" });
     }
 }

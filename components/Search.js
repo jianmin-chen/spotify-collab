@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { Search, Plus, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/ui/useToast";
 
-export default function SearchComponent() {
+export default function SearchComponent({ onAddSong }) {
     const { toast } = useToast();
     const [showSearch, setShowSearch] = useState(true);
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState(null);
     const [query, setQuery] = useState("");
 
     useEffect(() => {
@@ -31,6 +31,7 @@ export default function SearchComponent() {
                 toast({
                     description: "Added to playlist!"
                 });
+                onAddSong();
             })
             .catch(err =>
                 toast({
@@ -81,25 +82,26 @@ export default function SearchComponent() {
                         />
                     </div>
                     <div className="overflow-y-auto overflow-x-hidden">
-                        {results.length === 0 ? (
-                            <p className="py-6 text-center text-sm text-white">
-                                No results found.
-                            </p>
-                        ) : (
-                            <div className="overflow-hidden py-3 px-2 text-white">
-                                {results.map(song => (
-                                    <button
-                                        className="bg-[#242424] block w-full hover:bg-[#282828] rounded-md"
-                                        key={song.id}
-                                        onClick={() => addSong(song.id)}>
-                                        <p className="relative flex cursor-default select-none items-center text-left rounded-md py-1.5 px-2 text-sm font-medium outline-none disabled:opacity-50">
-                                            {song.name} &middot;{" "}
-                                            {song.artists.join(", ")}
-                                        </p>
-                                    </button>
-                                ))}
-                            </div>
-                        )}
+                        {results !== null &&
+                            (results.length === 0 ? (
+                                <p className="py-6 text-center text-sm text-white">
+                                    No results found.
+                                </p>
+                            ) : (
+                                <div className="overflow-hidden py-3 px-2 text-white">
+                                    {results.map(song => (
+                                        <button
+                                            className="bg-[#242424] block w-full hover:bg-[#282828] rounded-md"
+                                            key={song.id}
+                                            onClick={() => addSong(song.id)}>
+                                            <p className="relative flex cursor-default select-none items-center text-left rounded-md py-1.5 px-2 text-sm font-medium outline-none disabled:opacity-50">
+                                                {song.name} &middot;{" "}
+                                                {song.artists.join(", ")}
+                                            </p>
+                                        </button>
+                                    ))}
+                                </div>
+                            ))}
                     </div>
                 </div>
             )}
