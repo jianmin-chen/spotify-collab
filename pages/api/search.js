@@ -19,13 +19,17 @@ export default async function handler(req, res) {
                 results: []
             });
         return res.status(200).json({
-            results: items.map(item => ({
-                id: item.id,
-                name: item.name,
-                artists: item.artists.map(artist => artist.name)
-            }))
+            results: items.flatMap(item => {
+                if (item.explicit === true) return [];
+                return {
+                    id: item.id,
+                    name: item.name,
+                    artists: item.artists.map(artist => artist.name)
+                };
+            })
         });
     } catch (err) {
+        console.log(err);
         return res.status(500).json({ err: err.message });
     }
 }

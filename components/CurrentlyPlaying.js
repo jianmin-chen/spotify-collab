@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/ui/useToast";
 
 export default function CurrentlyPlaying() {
     const { toast } = useToast();
     const [song, setSong] = useState(null);
+    const count = useRef(0);
 
     const getSong = () => {
         fetch("/api/current")
@@ -23,6 +24,8 @@ export default function CurrentlyPlaying() {
         if (song != null) {
             const timer = setTimeout(getSong, song.duration);
             return () => clearTimeout(timer);
+        } else if (count.current === 0) {
+            getSong();
         } else {
             const timer = setTimeout(getSong, 5000);
             return () => clearTimeout(timer);

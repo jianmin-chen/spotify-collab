@@ -28,7 +28,9 @@ export default function SearchComponent() {
         fetch(`/api/add?songId=${id}`)
             .then(res => res.json())
             .then(json => {
-                console.log(json);
+                toast({
+                    description: "Added to playlist!"
+                });
             })
             .catch(err =>
                 toast({
@@ -90,7 +92,7 @@ export default function SearchComponent() {
                                         className="bg-[#242424] block w-full hover:bg-[#282828] rounded-md"
                                         key={song.id}
                                         onClick={() => addSong(song.id)}>
-                                        <p className="relative flex cursor-default select-none items-center rounded-md py-1.5 px-2 text-sm font-medium outline-none disabled:opacity-50">
+                                        <p className="relative flex cursor-default select-none items-center text-left rounded-md py-1.5 px-2 text-sm font-medium outline-none disabled:opacity-50">
                                             {song.name} &middot;{" "}
                                             {song.artists.join(", ")}
                                         </p>

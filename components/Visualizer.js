@@ -46,7 +46,6 @@ export default function Visualizer() {
                 Tone.Destination.volume.value = 0.2;
                 const mic = new Tone.UserMedia();
                 await mic.open();
-                console.log("Mic connected: ", mic);
                 mic.connect(meter);
                 mic.connect(analyzer);
             }
