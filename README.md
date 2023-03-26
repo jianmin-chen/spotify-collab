@@ -4,6 +4,16 @@
 
 Created for [Horizon](https://horizon.hackclub.com). Unnecessarily ~~complicated~~ hacky, but so cool. Basically, the web interface at [horizonmusic.vercel.app](https://horizonmusic.vercel.app) allows everyone to add music to a Spotify playlist without having to log in (especially if they don't have an account) + automatically filters out explicit songs in the search so nobody adds explicit songs. Waveform with `p5.js` and `Tone.js` record surround sound (coming from speakers and other close noise) and transform it into a cool waveform, while a set of LED lights (Neopixels) flash along to the music, utilizing an Adafruit Feather Huzzah to wirelessly communicate with a computer (computer mic -> computer -> computer processing -> send FPS to Adafruit -> flash Neopixels!) through the amazing [`audio-reactive-led-strip`](https://github.com/scottlawsonbc/audio-reactive-led-strip) library.
 
+## Demo
+
+The Neopixels we used... didn't work particularly well.
+
+[Screenshare - 2023-03-25 4 30 36 PM.webm](https://user-images.githubusercontent.com/59099858/227759212-5da593c2-3787-43f5-a6ec-00c58c6cf130.webm)
+
+<br/>
+
+https://user-images.githubusercontent.com/59099858/227759195-cd7857d4-b54f-4f6c-ac3a-d61b5f3c37ba.mp4
+
 ## Getting set up
 
 *Note: Some of these instructions are for Mac, so make sure _you follow _the _appropriate__ instructions for_ those.*
@@ -30,4 +40,6 @@ SPOTIFY_PLAYLIST_ID=<playlist>
 ## Drawbacks
 
 I had an original version of this, but I accidentally `rm -rf`ed that. (Yes, I know.) So I rebuilt the web interface the day before and during the hackathon, and one apparent bug stood out: **there are no blocking requests**. And since Spotify adds songs in a queue/threads, the user might not receive feedback (i.e., "Added to playlist!") right away, which means they might press the add button for a song multiple times. And you know what that means? You get to manually remove multiple instances of the same song! Woo! No, I'm just joking. I'll probably never get around to it, but it's definitely on the to-fix list.
+
+Also, it doesn't look great on mobile. And I don't think mic access works particularly well in Chrome, sadly.
 
