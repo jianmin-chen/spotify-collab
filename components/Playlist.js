@@ -14,7 +14,7 @@ export default function Playlist({ playlistImage, playlistName, playlist }) {
                             {playlistName}!
                         </h1>
                         <p className="text-white mx-2 text-center">
-                            Add something at <b>horizonmusic.vercel.app</b>!
+                            Add something at <b>outernet-music.vercel.app</b>!
                         </p>
                     </>
                 )}
